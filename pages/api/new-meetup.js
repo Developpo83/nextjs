@@ -7,7 +7,11 @@ async function handler(req, res) {
 		const data = req.body;
 
 		const client = await MongoClient.connect(
-			"mongodb+srv://Luca:Nextjs83@cluster0.ryhfa.mongodb.net/meetups?retryWrites=true&w=majority"
+			"mongodb+srv://Luca:Nextjs83@cluster0.ryhfa.mongodb.net/meetups?retryWrites=true&w=majority",
+			{
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+			}
 		); //this is code you never want to run on the client side (security problems)
 
 		const db = client.db("meetups");

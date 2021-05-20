@@ -40,8 +40,11 @@ function HomePage(props) {
 export async function getStaticProps() {
 	// fetch data from an API
 	const client = await MongoClient.connect(
-		"mongodb+srv://Luca:Nextjs83@cluster0.ryhfa.mongodb.net/meetups?retryWrites=true&w=majority"
-		// { useUnifiedTopology: true }
+		"mongodb+srv://Luca:Nextjs83@cluster0.ryhfa.mongodb.net/meetups?retryWrites=true&w=majority",
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
 	);
 
 	const db = client.db();

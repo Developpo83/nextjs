@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 	client.close();
 
 	return {
-		fallback: true,
+		fallback: "blocking",
 		paths: meetups.map((meetup) => ({
 			params: {
 				meetupId: meetup._id.toString(),
@@ -39,7 +39,11 @@ export async function getStaticProps(context) {
 	const meetupId = context.params.meetupId; //meetupId is the identifier I have between [] as page name which refers a dynamic name/id
 
 	const client = await MongoClient.connect(
-		"mongodb+srv://Luca:Nextjs83@cluster0.ryhfa.mongodb.net/meetups?retryWrites=true&w=majority"
+		"mongodb+srv://Luca:Nextjs83@cluster0.ryhfa.mongodb.net/meetups?retryWrites=true&w=majority",
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
 	);
 
 	const db = client.db();
